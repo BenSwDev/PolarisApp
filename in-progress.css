@@ -1,0 +1,119 @@
+/* in-progress.css */
+
+/* Main Section Styles */
+.main-section {
+    margin-top: 100px;
+}
+
+.greeting {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#greetingText {
+    font-size: 2rem;
+    color: var(--color-gray);
+}
+
+#currentTime {
+    font-size: 1.2rem;
+    color: var(--color-gray-light);
+}
+
+.in-progress-missions {
+    margin-top: 40px;
+}
+
+.in-progress-missions h3 {
+    text-align: center;
+    font-size: 1.8rem;
+    color: var(--color-gray);
+    margin-bottom: 20px;
+}
+
+/* Missions Container */
+#inProgressMissionsContainer {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* Missions Tables */
+.missions-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 40px;
+    table-layout: fixed;
+    word-wrap: break-word;
+}
+
+.missions-table th, .missions-table td {
+    border: 1px solid var(--color-border);
+    padding: var(--spacing-sm);
+    text-align: left;
+    color: var(--color-gray);
+}
+
+.missions-table th {
+    background-color: var(--color-background-card);
+    color: var(--color-gray-light);
+}
+
+.missions-table tr:nth-child(even) {
+    background-color: var(--color-light);
+}
+
+.missions-table tr:hover {
+    background-color: var(--color-background-card);
+}
+
+.missions-table .action-btn {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    font-size: 0.9rem;
+    border: none;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.missions-table .action-btn.mark-done {
+    background: linear-gradient(135deg, var(--color-success), var(--color-success-dark));
+    color: var(--color-white);
+}
+
+.missions-table .action-btn.mark-done:hover {
+    background: linear-gradient(135deg, var(--color-success-dark), var(--color-success));
+    transform: scale(1.05);
+}
+
+.missions-table .action-btn.revert {
+    background: linear-gradient(135deg, var(--color-info), var(--color-info-dark));
+    color: var(--color-white);
+}
+
+.missions-table .action-btn.revert:hover {
+    background: linear-gradient(135deg, var(--color-info-dark), var(--color-info));
+    transform: scale(1.05);
+}
+
+/* Title Styles */
+.in-progress-missions h4 {
+    margin-top: var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
+    color: var(--color-gray);
+    font-size: 1.5rem;
+    text-align: left;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .missions-table th, .missions-table td {
+        font-size: 0.9rem;
+        padding: var(--spacing-xs);
+    }
+
+    .missions-table .action-btn {
+        font-size: 0.8rem;
+        padding: var(--spacing-xxs) var(--spacing-xs);
+    }
+}
+
