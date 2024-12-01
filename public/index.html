@@ -173,48 +173,10 @@
 </footer>
 
 <!-- Firebase SDKs -->
-<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
-
-<script>
-    // Firebase configuration
-    const firebaseConfig = {
-      apiKey: "AIzaSyClFlC_URVRiFV_jdcG5L6ChxaTjH1Z7Qg",
-      authDomain: "polaris-app-f0d6a.firebaseapp.com",
-      projectId: "polaris-app-f0d6a",
-      storageBucket: "polaris-app-f0d6a.firebasestorage.app",
-      messagingSenderId: "573044910827",
-      appId: "1:573044910827:web:a2fc7a0c330e651f92ecae",
-      measurementId: "G-RBJ0LJ0S00"
-    };
-
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
-    const db = firebase.firestore();
-
-    // Example: Sign in with Google
-    const provider = new firebase.auth.GoogleAuthProvider();
-    auth.signInWithPopup(provider)
-        .then((result) => {
-            console.log("User signed in:", result.user);
-        })
-        .catch((error) => {
-            console.error("Sign-in error:", error);
-        });
-
-    // Example: Firestore write
-    db.collection("users").doc("user-id").set({
-        name: "John Doe",
-        email: "johndoe@example.com",
-    }).then(() => {
-        console.log("Document successfully written!");
-    }).catch((error) => {
-        console.error("Error writing document:", error);
-    });
-
-</script>
+<!-- Use the 'compat' versions to avoid module import errors -->
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
 
 <!-- Existing scripts -->
 <script src="app.js"></script>

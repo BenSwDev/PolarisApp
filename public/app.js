@@ -1,3 +1,34 @@
+// Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyClFlC_URVRiFV_jdcG5L6ChxaTjH1Z7Qg",
+  authDomain: "polaris-app-f0d6a.firebaseapp.com",
+  projectId: "polaris-app-f0d6a",
+  storageBucket: "polaris-app-f0d6a.firebasestorage.app",
+  messagingSenderId: "573044910827",
+  appId: "1:573044910827:web:a2fc7a0c330e651f92ecae",
+  measurementId: "G-RBJ0LJ0S00"
+};
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+var auth = firebase.auth();
+var db = firebase.firestore();
+
+// Data Storage
+let projects = [];
+let currentProjectIndex = null;
+let editMissionIndex = null;
+let editSubMissionIndex = null;
+
+// Utility Functions
+function $(selector) {
+    return document.querySelector(selector);
+}
+
+function $$(selector) {
+    return document.querySelectorAll(selector);
+}
+
 
 // Data Storage
 let projects = [];

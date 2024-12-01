@@ -1,4 +1,38 @@
 // in-progress.js
+// in-progress.js
+
+function initializeInProgressMissions() {
+    displayInProgressMissions();
+}
+
+// Call this function on page load
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize In Progress Missions Section
+    initializeInProgressMissions();
+});
+
+/**
+ * Display In Progress and Done Missions with Real-Time Updates
+ */
+function displayInProgressMissions() {
+    const user = auth.currentUser;
+    if (!user) return;
+
+    const missionsContainer = document.getElementById('inProgressMissionsContainer');
+    missionsContainer.innerHTML = ''; // Clear previous content
+
+    db.collection('users').doc(user.uid).onSnapshot((doc) => {
+        if (doc.exists) {
+            projects = doc.data().projects;
+            renderInProgressMissions();
+        } else {
+            projects = [];
+            renderInProgressMissions();
+        }
+    }, (error) => {
+        showNotification('Failed to load data.', 'error');
+    });
+}
 
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize In Progress Missions Section
