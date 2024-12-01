@@ -1,19 +1,18 @@
 // in-progress.js
-
-// Call this function on page load
 document.addEventListener('DOMContentLoaded', function() {
-    // Wait for Firebase auth to be ready
-    firebase.auth().onAuthStateChanged(function(user) {
-        // Initialize In Progress Missions Section
-        initializeInProgressMissions();
-    });
-});
+    // Ensure auth is defined
+    if (typeof auth === 'undefined') {
+        console.error('Firebase auth is not defined.');
+        return;
+    }
 
+    // Initialize In Progress Missions Section
+    initializeInProgressMissions();
+});
 
 function initializeInProgressMissions() {
     displayInProgressMissions();
 }
-
 /**
  * Display In Progress and Done Missions with Real-Time Updates
  */

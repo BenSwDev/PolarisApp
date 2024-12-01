@@ -1,5 +1,6 @@
 // app.js
 // Firebase configuration
+document.addEventListener('DOMContentLoaded', function() {
 const firebaseConfig = {
   apiKey: "AIzaSyClFlC_URVRiFV_jdcG5L6ChxaTjH1Z7Qg",
   authDomain: "polaris-app-f0d6a.firebaseapp.com",
@@ -1229,3 +1230,4 @@ function updateGreetingAndTime() {
     setInterval(updateTime, 1000); // Update every second
 }
 
+});
