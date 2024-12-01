@@ -1,89 +1,224 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Welcome to Firebase Hosting</title>
+<html lang="en" dir="ltr" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <title>POLARIS-PM</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="in-progress.css">
+</head>
+<body>
 
-    <!-- update the version number as needed -->
-    <script defer src="/__/firebase/11.0.2/firebase-app-compat.js"></script>
-    <!-- include only the Firebase features as you need -->
-    <script defer src="/__/firebase/11.0.2/firebase-auth-compat.js"></script>
-    <script defer src="/__/firebase/11.0.2/firebase-database-compat.js"></script>
-    <script defer src="/__/firebase/11.0.2/firebase-firestore-compat.js"></script>
-    <script defer src="/__/firebase/11.0.2/firebase-functions-compat.js"></script>
-    <script defer src="/__/firebase/11.0.2/firebase-messaging-compat.js"></script>
-    <script defer src="/__/firebase/11.0.2/firebase-storage-compat.js"></script>
-    <script defer src="/__/firebase/11.0.2/firebase-analytics-compat.js"></script>
-    <script defer src="/__/firebase/11.0.2/firebase-remote-config-compat.js"></script>
-    <script defer src="/__/firebase/11.0.2/firebase-performance-compat.js"></script>
-    <!-- 
-      initialize the SDK after all desired features are loaded, set useEmulator to false
-      to avoid connecting the SDK to running emulators.
-    -->
-    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
-
-    <style media="screen">
-      body { background: #ECEFF1; color: rgba(0,0,0,0.87); font-family: Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
-      #message { background: white; max-width: 360px; margin: 100px auto 16px; padding: 32px 24px; border-radius: 3px; }
-      #message h2 { color: #ffa100; font-weight: bold; font-size: 16px; margin: 0 0 8px; }
-      #message h1 { font-size: 22px; font-weight: 300; color: rgba(0,0,0,0.6); margin: 0 0 16px;}
-      #message p { line-height: 140%; margin: 16px 0 24px; font-size: 14px; }
-      #message a { display: block; text-align: center; background: #039be5; text-transform: uppercase; text-decoration: none; color: white; padding: 16px; border-radius: 4px; }
-      #message, #message a { box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); }
-      #load { color: rgba(0,0,0,0.4); text-align: center; font-size: 13px; }
-      @media (max-width: 600px) {
-        body, #message { margin-top: 0; background: white; box-shadow: none; }
-        body { border-top: 16px solid #ffa100; }
-      }
-    </style>
-  </head>
-  <body>
-    <div id="message">
-      <h2>Welcome</h2>
-      <h1>Firebase Hosting Setup Complete</h1>
-      <p>You're seeing this because you've successfully setup Firebase Hosting. Now it's time to go build something extraordinary!</p>
-      <a target="_blank" href="https://firebase.google.com/docs/hosting/">Open Hosting Documentation</a>
+<!-- Navigation Bar -->
+<nav class="navbar">
+    <div class="container">
+        <a href="#" class="logo">POLARIS* app</a>
+        <div class="nav-links">
+            <a href="#mainSection">HOME</a>
+            <a href="#projects">My Projects</a>
+        </div>
+        <div class="theme-switch-wrapper">
+            <label class="theme-switch" for="themeCheckbox">
+                <input type="checkbox" id="themeCheckbox" />
+                <span class="slider"></span>
+            </label>
+        </div>
+        <div class="auth-buttons">
+            <button id="loginBtn" class="btn">Login</button>
+            <button id="logoutBtn" class="btn hidden">Logout</button>
+        </div>
     </div>
-    <p id="load">Firebase SDK Loading&hellip;</p>
+</nav>
 
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        const loadEl = document.querySelector('#load');
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-        // // The Firebase SDK is initialized and available here!
-        //
-        // firebase.auth().onAuthStateChanged(user => { });
-        // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
-        // firebase.firestore().doc('/foo/bar').get().then(() => { });
-        // firebase.functions().httpsCallable('yourFunction')().then(() => { });
-        // firebase.messaging().requestPermission().then(() => { });
-        // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
-        // firebase.analytics(); // call to activate
-        // firebase.analytics().logEvent('tutorial_completed');
-        // firebase.performance(); // call to activate
-        //
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+<div class="container">
+    <h1 class="text-center">POLARIS</h1>
 
-        try {
-          let app = firebase.app();
-          let features = [
-            'auth', 
-            'database', 
-            'firestore',
-            'functions',
-            'messaging', 
-            'storage', 
-            'analytics', 
-            'remoteConfig',
-            'performance',
-          ].filter(feature => typeof app[feature] === 'function');
-          loadEl.textContent = `Firebase SDK loaded with ${features.join(', ')}`;
-        } catch (e) {
-          console.error(e);
-          loadEl.textContent = 'Error loading the Firebase SDK, check the console.';
-        }
-      });
-    </script>
-  </body>
+    <!-- Main Section Starts -->
+    <section id="mainSection" class="main-section content-section">
+        <div class="greeting">
+            <h2 id="greetingText"></h2>
+            <p id="currentTime"></p>
+        </div>
+        <div class="in-progress-missions">
+            <h3>In Progress Missions</h3>
+            <div id="inProgressMissionsContainer">
+                <!-- Missions will be dynamically inserted here -->
+            </div>
+        </div>
+    </section>
+    <!-- Main Section End -->
+
+    <!-- Projects Section Starts -->
+    <section class="project-section content-section" id="projects">
+        <button id="addProjectBtn" class="btn add-btn">Add New Project</button>
+
+        <!-- Projects Grid for Desktop and Tablet -->
+        <div id="projectsContainer" class="projects-grid"></div>
+
+        <!-- Projects List for Mobile -->
+        <ul id="projectsList" class="projects-list hidden"></ul>
+
+        <!-- Project Content Area -->
+        <div id="projectContentArea" class="project-content-area hidden">
+            <span class="close" id="closeProjectContentArea">&times;</span>
+            <div class="project-title-in-content-area">
+                <h2 id="projectContentTitle"></h2>
+                <button id="addMissionBtn" class="btn add-btn">Add Mission</button>
+            </div>
+
+            <!-- Missions Section -->
+            <div id="missionsSection">
+                <!-- Missions Container -->
+                <div id="missionsContainer">
+                    <!-- Missions will be dynamically inserted here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Add/Edit Project Modal -->
+        <div id="projectModal" class="modal hidden">
+            <div class="modal-content">
+                <span class="close" id="closeProjectModal">&times;</span>
+                <h2 id="projectModalTitle">Add New Project</h2>
+                <form id="projectForm">
+                    <label for="projectName">Project Name:</label>
+                    <input type="text" id="projectName" required>
+
+                    <label for="projectDescription">Description:</label>
+                    <textarea id="projectDescription" required></textarea>
+
+                    <button type="submit" class="btn add-btn">Save Project</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Description Modal -->
+        <div id="descriptionModal" class="modal hidden">
+            <div class="modal-content">
+                <span class="close" id="closeDescriptionModal">&times;</span>
+                <h2 id="descTitle"></h2>
+                <p id="descContent"></p>
+            </div>
+        </div>
+
+        <!-- Confirmation Modal -->
+        <div id="confirmationModal" class="modal hidden">
+            <div class="modal-content">
+                <span class="close" id="closeConfirmationModal">&times;</span>
+                <h2>Confirm Action</h2>
+                <p id="confirmationMessage"></p>
+                <div class="confirmation-buttons">
+                    <button id="confirmYesBtn" class="btn done-btn">Yes</button>
+                    <button id="confirmNoBtn" class="btn delete-btn">No</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add/Edit Mission Modal -->
+        <div id="missionModal" class="modal hidden">
+            <div class="modal-content">
+                <span class="close" id="closeMissionModal">&times;</span>
+                <h2 id="missionModalTitle">Add New Mission</h2>
+                <form id="missionForm">
+                    <label for="missionName">Mission Name:</label>
+                    <input type="text" id="missionName" required>
+
+                    <label for="missionDescription">Description:</label>
+                    <textarea id="missionDescription" required></textarea>
+
+                    <label for="missionType">Mission Type:</label>
+                    <select id="missionType" required>
+                        <option value="single">Single Mission</option>
+                        <option value="withSubmissions">Mission with Sub-Missions</option>
+                    </select>
+
+                    <!-- Sub-Missions Section -->
+                    <div id="subMissionsSection" class="hidden">
+                        <h3>Sub-Missions (Up to 10)</h3>
+                        <div id="subMissionsContainer"></div>
+                        <button type="button" id="addSubMissionBtn" class="btn add-btn">Add Sub-Mission</button>
+                    </div>
+
+                    <button type="submit" class="btn add-btn">Save Mission</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Edit Sub-Mission Modal -->
+        <div id="editSubMissionModal" class="modal hidden">
+            <div class="modal-content">
+                <span class="close" id="closeEditSubMissionModal">&times;</span>
+                <h2>Edit Sub-Mission</h2>
+                <form id="editSubMissionForm">
+                    <label for="editSubMissionName">Sub-Mission Name:</label>
+                    <input type="text" id="editSubMissionName" required>
+
+                    <label for="editSubMissionDescription">Description:</label>
+                    <textarea id="editSubMissionDescription" required></textarea>
+
+                    <button type="submit" class="btn add-btn">Save Changes</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Notification Container -->
+        <div id="notificationContainer"></div>
+    </section>
+    <!-- Projects Section Ends -->
+
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+    <p>&copy; 2024 POLARIS* Project Management App. All rights reserved.</p>
+</footer>
+
+<!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
+
+<script>
+    // Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyClFlC_URVRiFV_jdcG5L6ChxaTjH1Z7Qg",
+      authDomain: "polaris-app-f0d6a.firebaseapp.com",
+      projectId: "polaris-app-f0d6a",
+      storageBucket: "polaris-app-f0d6a.firebasestorage.app",
+      messagingSenderId: "573044910827",
+      appId: "1:573044910827:web:a2fc7a0c330e651f92ecae",
+      measurementId: "G-RBJ0LJ0S00"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+
+    // Example: Sign in with Google
+    const provider = new firebase.auth.GoogleAuthProvider();
+    auth.signInWithPopup(provider)
+        .then((result) => {
+            console.log("User signed in:", result.user);
+        })
+        .catch((error) => {
+            console.error("Sign-in error:", error);
+        });
+
+    // Example: Firestore write
+    db.collection("users").doc("user-id").set({
+        name: "John Doe",
+        email: "johndoe@example.com",
+    }).then(() => {
+        console.log("Document successfully written!");
+    }).catch((error) => {
+        console.error("Error writing document:", error);
+    });
+
+</script>
+
+<!-- Existing scripts -->
+<script src="app.js"></script>
+<script src="in-progress.js"></script>
+
+</body>
 </html>

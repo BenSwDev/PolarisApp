@@ -5,20 +5,11 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeInProgressMissions();
 });
 
-/**
- * Initialize the In Progress Missions Section
- */
-function initializeInProgressMissions() {
-    // Check if user is authenticated
-    auth.onAuthStateChanged((user) => {
-        if (user) {
-            displayInProgressMissions();
-        } else {
-            const missionsContainer = document.getElementById('inProgressMissionsContainer');
-            missionsContainer.innerHTML = '<p class="text-center">Please log in to see your missions.</p>';
-        }
-    });
-}
+// Call this function on page load
+document.addEventListener("DOMContentLoaded", () => {
+    initializeInProgressMissions();
+});
+
 
 /**
  * Display In Progress and Done Missions with Real-Time Updates

@@ -1,6 +1,3 @@
-// Initialize Firebase services
-const auth = firebase.auth();
-const db = firebase.firestore();
 
 // Data Storage
 let projects = [];
