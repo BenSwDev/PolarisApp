@@ -1,15 +1,14 @@
 // in-progress.js
-// in-progress.js
-
-function initializeInProgressMissions() {
-    displayInProgressMissions();
-}
 
 // Call this function on page load
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize In Progress Missions Section
     initializeInProgressMissions();
 });
+
+function initializeInProgressMissions() {
+    displayInProgressMissions();
+}
 
 /**
  * Display In Progress and Done Missions with Real-Time Updates

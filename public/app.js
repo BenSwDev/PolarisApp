@@ -1,3 +1,6 @@
+// app.js
+
+
 // Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyClFlC_URVRiFV_jdcG5L6ChxaTjH1Z7Qg",
@@ -13,22 +16,6 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 var auth = firebase.auth();
 var db = firebase.firestore();
-
-// Data Storage
-let projects = [];
-let currentProjectIndex = null;
-let editMissionIndex = null;
-let editSubMissionIndex = null;
-
-// Utility Functions
-function $(selector) {
-    return document.querySelector(selector);
-}
-
-function $$(selector) {
-    return document.querySelectorAll(selector);
-}
-
 
 // Data Storage
 let projects = [];
