@@ -12,8 +12,8 @@ const firebaseConfig = {
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
-var auth = firebase.auth();
-var db = firebase.firestore();
+window.auth = firebase.auth();
+window.db = firebase.firestore();
 
 // Data Storage
 let projects = [];

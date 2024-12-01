@@ -2,9 +2,13 @@
 
 // Call this function on page load
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize In Progress Missions Section
-    initializeInProgressMissions();
+    // Wait for Firebase auth to be ready
+    firebase.auth().onAuthStateChanged(function(user) {
+        // Initialize In Progress Missions Section
+        initializeInProgressMissions();
+    });
 });
+
 
 function initializeInProgressMissions() {
     displayInProgressMissions();
