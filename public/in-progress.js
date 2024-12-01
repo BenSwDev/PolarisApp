@@ -13,6 +13,8 @@ function initializeInProgressMissions() {
 /**
  * Display In Progress and Done Missions with Real-Time Updates
  */
+let unsubscribeMissionsListener = null;
+
 function displayInProgressMissions() {
     const user = auth.currentUser;
     if (!user) return;
@@ -20,52 +22,28 @@ function displayInProgressMissions() {
     const missionsContainer = document.getElementById('inProgressMissionsContainer');
     missionsContainer.innerHTML = ''; // Clear previous content
 
-    db.collection('users').doc(user.uid).onSnapshot((doc) => {
-        if (doc.exists) {
-            projects = doc.data().projects;
-            renderInProgressMissions();
-        } else {
-            projects = [];
-            renderInProgressMissions();
+    // Unsubscribe from any existing listener
+    if (unsubscribeMissionsListener) {
+        unsubscribeMissionsListener();
+    }
+
+    // Set up a new real-time listener
+    unsubscribeMissionsListener = db.collection('users').doc(user.uid).onSnapshot(
+        (doc) => {
+            if (doc.exists) {
+                projects = doc.data().projects;
+                renderInProgressMissions();
+            } else {
+                projects = [];
+                renderInProgressMissions();
+            }
+        },
+        (error) => {
+            showNotification('Failed to load data.', 'error');
         }
-    }, (error) => {
-        showNotification('Failed to load data.', 'error');
-    });
+    );
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Initialize In Progress Missions Section
-    initializeInProgressMissions();
-});
-
-// Call this function on page load
-document.addEventListener("DOMContentLoaded", () => {
-    initializeInProgressMissions();
-});
-
-
-/**
- * Display In Progress and Done Missions with Real-Time Updates
- */
-function displayInProgressMissions() {
-    const user = auth.currentUser;
-    if (!user) return;
-
-    const missionsContainer = document.getElementById('inProgressMissionsContainer');
-    missionsContainer.innerHTML = ''; // Clear previous content
-
-    db.collection('users').doc(user.uid).onSnapshot((doc) => {
-        if (doc.exists) {
-            projects = doc.data().projects;
-            renderInProgressMissions();
-        } else {
-            projects = [];
-            renderInProgressMissions();
-        }
-    }, (error) => {
-        showNotification('Failed to load data.', 'error');
-    });
-}
 
 /**
  * Render In Progress and Done Missions
