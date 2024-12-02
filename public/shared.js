@@ -1,26 +1,44 @@
 // shared.js
 
-// Initialize Firebase (Add your Firebase configuration here)
+// Set DEV_MODE to true for development mode (anonymous auth)
+// Set DEV_MODE to false for production mode (Google auth)
+
+// Uncomment the line for the desired mode:
+
+ const DEV_MODE = true; // Development Mode
+//const DEV_MODE = false; // Production Mode
+
+// Firebase configuration for Development and Production
+const firebaseConfig = DEV_MODE ? {
+    // Development Firebase config
+    // Replace with your development Firebase project's config
+    apiKey: "AIzaSyClFlC_URVRiFV_jdcG5L6ChxaTjH1Z7Qg",
+    authDomain: "polaris-app-f0d6a.firebaseapp.com",
+    projectId: "polaris-app-f0d6a",
+    storageBucket: "polaris-app-f0d6a.firebasestorage.app",
+    messagingSenderId: "573044910827",
+    appId: "1:573044910827:web:a2fc7a0c330e651f92ecae",
+    measurementId: "G-RBJ0LJ0S00"
+} : {
+    // Production Firebase config
+    // Replace with your production Firebase project's config
+    apiKey: "AIzaSyClFlC_URVRiFV_jdcG5L6ChxaTjH1Z7Qg",
+    authDomain: "polaris-app-f0d6a.firebaseapp.com",
+    projectId: "polaris-app-f0d6a",
+    storageBucket: "polaris-app-f0d6a.firebasestorage.app",
+    messagingSenderId: "573044910827",
+    appId: "1:573044910827:web:a2fc7a0c330e651f92ecae",
+    measurementId: "G-RBJ0LJ0S00"
+};
+
+// Initialize Firebase
 if (!firebase.apps.length) {
-    firebase.initializeApp({
-          apiKey: "AIzaSyClFlC_URVRiFV_jdcG5L6ChxaTjH1Z7Qg",
-          authDomain: "polaris-app-f0d6a.firebaseapp.com",
-          projectId: "polaris-app-f0d6a",
-          storageBucket: "polaris-app-f0d6a.firebasestorage.app",
-          messagingSenderId: "573044910827",
-          appId: "1:573044910827:web:a2fc7a0c330e651f92ecae",
-          measurementId: "G-RBJ0LJ0S00"
-      });
+    firebase.initializeApp(firebaseConfig);
 }
 
 // Initialize Firestore and Auth
 const db = firebase.firestore();
 const auth = firebase.auth();
-
-if (window.location.hostname === 'localhost') {
-    db.useEmulator('localhost', 8080); // Replace 8080 with your Firestore emulator port
-    auth.useEmulator('http://localhost:9099/'); // Replace 9099 with your Auth emulator port
-}
 
 // Shared Data
 let projects = [];
@@ -128,7 +146,9 @@ auth.onAuthStateChanged((user) => {
         // Update UI to show user is logged in
         document.getElementById('loginBtn').classList.add('hidden');
         document.getElementById('logoutBtn').classList.remove('hidden');
-        updateGreetingAndTime();
+        if (typeof updateGreetingAndTime === 'function') {
+            updateGreetingAndTime();
+        }
     } else {
         projects = [];
         if (typeof displayProjects === 'function') {
@@ -140,7 +160,38 @@ auth.onAuthStateChanged((user) => {
         // Update UI to show user is logged out
         document.getElementById('loginBtn').classList.remove('hidden');
         document.getElementById('logoutBtn').classList.add('hidden');
+
+        if (DEV_MODE) {
+            // Sign in anonymously in development mode
+            auth.signInAnonymously().catch((error) => {
+                showNotification('Failed to sign in anonymously.', 'error');
+                console.error(error);
+            });
+        }
     }
+});
+
+// Login and Logout Button Event Listeners
+document.getElementById('loginBtn').addEventListener('click', () => {
+    if (DEV_MODE) {
+        // In development mode, sign in anonymously
+        auth.signInAnonymously().catch((error) => {
+            showNotification('Failed to sign in anonymously.', 'error');
+            console.error(error);
+        });
+    } else {
+        // In production mode, use Google sign-in
+        const provider = new firebase.auth.GoogleAuthProvider();
+        auth.signInWithPopup(provider).catch((error) => {
+            showNotification('Login failed.', 'error');
+        });
+    }
+});
+
+document.getElementById('logoutBtn').addEventListener('click', () => {
+    auth.signOut().catch((error) => {
+        showNotification('Logout failed.', 'error');
+    });
 });
 
 // Expose shared variables and functions globally
