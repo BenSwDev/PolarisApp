@@ -1,62 +1,30 @@
 // in-progress.js
 
-var projects = window.projects;
-
 document.addEventListener('DOMContentLoaded', function() {
-    // Ensure auth is defined
-    if (typeof auth === 'undefined') {
-        console.error('Firebase auth is not defined.');
-        return;
-    }
-
     // Initialize In Progress Missions Section
     initializeInProgressMissions();
 });
 
+/**
+ * Initialize the In Progress Missions Section
+ */
 function initializeInProgressMissions() {
+    // Initial display
     displayInProgressMissions();
 }
+
 /**
  * Display In Progress and Done Missions with Real-Time Updates
  */
-let unsubscribeMissionsListener = null;
-
 function displayInProgressMissions() {
-    const user = auth.currentUser;
-    if (!user) return;
-
     const missionsContainer = document.getElementById('inProgressMissionsContainer');
     missionsContainer.innerHTML = ''; // Clear previous content
 
-    // Unsubscribe from any existing listener
-    if (unsubscribeMissionsListener) {
-        unsubscribeMissionsListener();
+    // Ensure projects are loaded
+    if (typeof projects === 'undefined' || !projects || projects.length === 0) {
+        missionsContainer.innerHTML = '<p class="text-center">No missions available.</p>';
+        return;
     }
-
-    // Set up a new real-time listener
-    unsubscribeMissionsListener = db.collection('users').doc(user.uid).onSnapshot(
-        (doc) => {
-            if (doc.exists) {
-                projects = doc.data().projects;
-                renderInProgressMissions();
-            } else {
-                projects = [];
-                renderInProgressMissions();
-            }
-        },
-        (error) => {
-            showNotification('Failed to load data.', 'error');
-        }
-    );
-}
-
-
-/**
- * Render In Progress and Done Missions
- */
-function renderInProgressMissions() {
-    const missionsContainer = document.getElementById('inProgressMissionsContainer');
-    missionsContainer.innerHTML = ''; // Clear previous content
 
     let inProgressMissions = [];
     let doneMissions = [];
@@ -135,7 +103,7 @@ function renderInProgressMissions() {
                 </tr>
             </thead>
             <tbody>
-                ${inProgressMissions.map((mission, index) => `
+                ${inProgressMissions.map((mission) => `
                     <tr>
                         <td>${mission.projectName}</td>
                         <td>${mission.missionName}</td>
@@ -180,7 +148,7 @@ function renderInProgressMissions() {
                 </tr>
             </thead>
             <tbody>
-                ${doneMissions.map((mission, index) => `
+                ${doneMissions.map((mission) => `
                     <tr>
                         <td>${mission.projectName}</td>
                         <td>${mission.missionName}</td>
@@ -247,6 +215,9 @@ function handleMarkDone(e) {
 
     // Notify User
     showNotification('Mission marked as done!', 'success');
+
+    // Refresh the In Progress Missions Display
+    displayInProgressMissions();
 }
 
 /**
@@ -285,6 +256,9 @@ function handleRevert(e) {
 
     // Save changes to Firestore
     saveProjectsToFirestore();
+
+    // Refresh the In Progress Missions Display
+    displayInProgressMissions();
 }
 
 /**
@@ -326,4 +300,10 @@ function updateProjectProgress(projectIndex) {
     });
 
     project.progress = totalWeight > 0 ? Math.round((completedWeight / totalWeight) * 100) : 0;
+
+    // Save updated progress to Firestore
+    saveProjectsToFirestore();
 }
+
+// Expose renderInProgressMissions function globally
+window.renderInProgressMissions = displayInProgressMissions;
