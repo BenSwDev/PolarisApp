@@ -1,6 +1,9 @@
 // in-progress.js
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Attach Event Listeners to Action Buttons
+    attachActionButtonListeners();
+
     // Initialize In Progress Missions Section
     initializeInProgressMissions();
 });
@@ -169,9 +172,6 @@ function displayInProgressMissions() {
         missionsContainer.appendChild(doneTitle);
         missionsContainer.innerHTML += '<p class="text-center">No done missions.</p>';
     }
-
-    // Attach Event Listeners to Action Buttons
-    attachActionButtonListeners();
 }
 
 /**

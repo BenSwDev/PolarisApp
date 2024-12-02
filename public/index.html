@@ -9,12 +9,12 @@
 <body>
 
 <!-- Navigation Bar -->
-<nav class="navbar">
+<nav class="navbar" id="navMenu">
     <div class="container">
         <a href="#" class="logo">POLARIS* app</a>
         <div class="nav-links">
-            <a href="#mainSection">HOME</a>
-            <a href="#projects">My Projects</a>
+            <a href="#" id="homeLink">HOME</a>
+            <a href="#" id="projectsLink">My Projects</a>
         </div>
         <div class="theme-switch-wrapper">
             <label class="theme-switch" for="themeCheckbox">
@@ -28,6 +28,13 @@
         </div>
     </div>
 </nav>
+
+<!-- Home Page Section for Logged Out Users -->
+<section id="homePageSection" class="content-section hidden">
+    <div class="container">
+        <h1>Home page will be shown here</h1>
+    </div>
+</section>
 
 <div class="container">
     <h1 class="text-center">POLARIS</h1>
@@ -48,7 +55,7 @@
     <!-- Main Section End -->
 
     <!-- Projects Section Starts -->
-    <section class="project-section content-section" id="projects">
+    <section class="project-section content-section hidden" id="projects">
         <button id="addProjectBtn" class="btn add-btn">Add New Project</button>
 
         <!-- Projects Grid for Desktop and Tablet -->

@@ -125,6 +125,10 @@ function loadProjectsFromFirestore() {
             if (typeof renderInProgressMissions === 'function') {
                 renderInProgressMissions();
             }
+            // Update Missions Display if projectContentArea is visible
+            if (typeof displayMissions === 'function' && !document.getElementById('projectContentArea').classList.contains('hidden')) {
+                displayMissions();
+            }
         } else {
             projects = [];
             if (typeof displayProjects === 'function') {
@@ -141,6 +145,11 @@ function loadProjectsFromFirestore() {
 
 // Authentication State Observer
 auth.onAuthStateChanged((user) => {
+    const navMenu = document.getElementById('navMenu');
+    const mainSection = document.getElementById('mainSection');
+    const projectsSection = document.getElementById('projects');
+    const homePageSection = document.getElementById('homePageSection');
+
     if (user) {
         loadProjectsFromFirestore();
         // Update UI to show user is logged in
@@ -149,6 +158,12 @@ auth.onAuthStateChanged((user) => {
         if (typeof updateGreetingAndTime === 'function') {
             updateGreetingAndTime();
         }
+
+        // Show navigation and main sections
+        navMenu.classList.remove('hidden');
+        homePageSection.classList.add('hidden');
+        mainSection.classList.remove('hidden');
+        projectsSection.classList.add('hidden'); // Show only main section initially
     } else {
         projects = [];
         if (typeof displayProjects === 'function') {
@@ -160,6 +175,12 @@ auth.onAuthStateChanged((user) => {
         // Update UI to show user is logged out
         document.getElementById('loginBtn').classList.remove('hidden');
         document.getElementById('logoutBtn').classList.add('hidden');
+
+        // Hide navigation and main sections
+        navMenu.classList.add('hidden');
+        homePageSection.classList.remove('hidden');
+        mainSection.classList.add('hidden');
+        projectsSection.classList.add('hidden');
 
         if (DEV_MODE) {
             // Sign in anonymously in development mode
@@ -192,6 +213,19 @@ document.getElementById('logoutBtn').addEventListener('click', () => {
     auth.signOut().catch((error) => {
         showNotification('Logout failed.', 'error');
     });
+});
+
+// Navigation Links Event Listeners
+document.getElementById('homeLink').addEventListener('click', function(e) {
+    e.preventDefault();
+    document.getElementById('mainSection').classList.remove('hidden');
+    document.getElementById('projects').classList.add('hidden');
+});
+
+document.getElementById('projectsLink').addEventListener('click', function(e) {
+    e.preventDefault();
+    document.getElementById('mainSection').classList.add('hidden');
+    document.getElementById('projects').classList.remove('hidden');
 });
 
 // Expose shared variables and functions globally

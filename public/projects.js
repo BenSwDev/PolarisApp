@@ -429,6 +429,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Re-enable missionType select after adding/editing
         $('#missionType').disabled = false;
+
+        // Update Missions Display
+        displayMissions();
     });
 
     /* ----------------------------
@@ -519,13 +522,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function openProjectDetails(index) {
         const projIndex = parseInt(index);
-        if (currentProjectIndex === projIndex) {
-            // Close if the same project is clicked again
-            hideElement($('#projectContentArea'));
-            currentProjectIndex = null;
-            return;
-        }
-
         currentProjectIndex = projIndex;
         const project = projects[currentProjectIndex];
         $('#projectContentTitle').innerText = project.name;
