@@ -165,6 +165,13 @@ auth.onAuthStateChanged((user) => {
         mainSection.classList.remove('hidden');
         projectsSection.classList.add('hidden'); // Show only main section initially
     } else {
+        projects = [];
+        if (typeof displayProjects === 'function') {
+            displayProjects();
+        }
+        if (typeof renderInProgressMissions === 'function') {
+            renderInProgressMissions();
+        }
         // Update UI to show user is logged out
         document.getElementById('loginBtn').classList.remove('hidden');
         document.getElementById('logoutBtn').classList.add('hidden');
@@ -173,7 +180,6 @@ auth.onAuthStateChanged((user) => {
         homePageSection.classList.remove('hidden');
         mainSection.classList.add('hidden');
         projectsSection.classList.add('hidden');
-
     }
 });
 
