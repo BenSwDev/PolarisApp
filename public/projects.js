@@ -1,6 +1,7 @@
-// app.js
-// Firebase configuration
+// projects.js
 document.addEventListener('DOMContentLoaded', function() {
+
+// Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyClFlC_URVRiFV_jdcG5L6ChxaTjH1Z7Qg",
   authDomain: "polaris-app-f0d6a.firebaseapp.com",
@@ -17,10 +18,16 @@ window.auth = firebase.auth();
 window.db = firebase.firestore();
 
 // Data Storage
-let projects = [];
+window.projects = [];
 let currentProjectIndex = null;
 let editMissionIndex = null;
 let editSubMissionIndex = null;
+
+// Assign functions to the window object in projects.js to make them accessible in in-progress.js
+window.saveProjectsToFirestore = saveProjectsToFirestore;
+window.updateProjectProgress = updateProjectProgress;
+window.showNotification = showNotification;
+
 
 // Utility Functions
 function $(selector) {

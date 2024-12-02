@@ -1,4 +1,7 @@
 // in-progress.js
+
+var projects = window.projects;
+
 document.addEventListener('DOMContentLoaded', function() {
     // Ensure auth is defined
     if (typeof auth === 'undefined') {
@@ -323,24 +326,4 @@ function updateProjectProgress(projectIndex) {
     });
 
     project.progress = totalWeight > 0 ? Math.round((completedWeight / totalWeight) * 100) : 0;
-}
-
-/**
- * Show Notification
- * @param {string} message
- * @param {string} type - 'success', 'error', 'info'
- */
-function showNotification(message, type = 'info') {
-    const notificationContainer = document.getElementById('notificationContainer');
-    const toast = document.createElement('div');
-    toast.classList.add('toast', type);
-    toast.innerText = message;
-    notificationContainer.appendChild(toast);
-
-    // Remove toast after animation ends (4s)
-    toast.addEventListener('animationend', (e) => {
-        if (e.animationName === 'fadeOut') {
-            toast.remove();
-        }
-    });
 }
